@@ -144,7 +144,7 @@ $(document).ready(function() {
 	Slot.prototype.start = function() {
 		var _this = this;
 		//winner =1;
-		winnerData = $.getJSON('app/game', function(data) {
+		winnerData = $.getJSON('app/game/', function(data) {
 		winner = data.winner; 
 		console.log('winner: ' + data.winner);
 		 
