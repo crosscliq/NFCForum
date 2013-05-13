@@ -144,11 +144,11 @@ $(document).ready(function() {
 	Slot.prototype.start = function() {
 		var _this = this;
 		//winner =1;
-		winnerData = $.getJSON('app/', function(data) {
+		winnerData = $.getJSON('app/game', function(data) {
 		winner = data.winner; 
 		console.log('winner: ' + data.winner);
 		 
-		//});
+		});
 		
 		
 		$(_this.el).addClass('motion');
@@ -169,7 +169,7 @@ $(document).ready(function() {
 	* Stops a slot
 	*/
 	Slot.prototype.stop = function() {
-		var winner=1;
+		//var winner=1;
 		
 
 		
