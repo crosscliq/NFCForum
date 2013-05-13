@@ -42,6 +42,11 @@ $f3->route('GET /luanch/@key',
 	function($f3) {
 		$key = $f3->get('PARAMS.key');
 		if($key ==  'A3FS7J') {
+			
+			//copy the db from offline to online
+			copy('db/data/game', 'db/data/offlinegame' );
+
+
 			$db=new DB\Jig('db/data/',DB\Jig::FORMAT_JSON);
 			$game=new DB\Jig\Mapper($db,'game');
 			$game->load(array('@game=?','1'));
