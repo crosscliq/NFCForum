@@ -45,20 +45,19 @@
 		 }
 		 #spin-btn { margin:auto; text-align:center; }
 		 #control {
+
 			text-indent:-9999px;
-			background:url(spin-up.png) center no-repeat;
+
 			background-size:75%;
 			height:100px;
 			
 			display:block;
 		 }
-		 #control:active{
-			background:url(spin-up.png) center no-repeat;
-		 }
-		 .pressed {
-			
-		 }
-	
+		 .start { 			background:url(btn.png) no-repeat; background-position:center 0px!important; }
+		 .start.pressed {  	background:url(btn.png) no-repeat; background-position:center -100px; }
+		 .stop.pressed {  	background:url(btn.png) no-repeat; background-position:center -310px; }
+		 .stop {  			background:url(btn.png) no-repeat; background-position:center -210px; }
+		 
 		 .slot { background:#fff  url(bars.png); background-position:0 4px;background-size:100%; }
 		 .motion {
 		    background:#fff url(bars-blur.png);
@@ -71,7 +70,7 @@
 	<body>
 	<div id="spin-btn">
 	<div id="result"></div>
-	<a href="#" id="control">Start</a>
+	<a href="#" id="control" class="start">Start</a>
 	</div>
 	<div id="frame">
 	</div>
@@ -82,9 +81,22 @@
 			<li id="slot3" class="slot"></li>
 		</ul>
 	</div>
-			<script>
+<script>
 
 $(document).ready(function() {
+
+	$('#control').mousedown( function() { 
+
+	$('#control').addClass='pressed';
+	
+	});
+	
+	$('#control').mouseup( function() { 
+
+	$('#control').removeClass='pressed';
+	
+	});
+
 	var winner    = 0,
 	    completed = 0,
 		imgHeight = 1200,
@@ -255,11 +267,11 @@ $(document).ready(function() {
 	};
 
 	function enableControl() {
-		$('#control').attr("disabled", false);
+	//	$('#control').css("opacity", '1');
 	}
 
 	function disableControl() {
-		$('#control').attr("disabled", true);
+		//$('#control').css("opacity", '0.5');
 	}
 
 	function printResult() {
@@ -283,12 +295,14 @@ $(document).ready(function() {
 	*/
 	$('#control').click(function() {
 		var x;
+
 		if(this.innerHTML == "Start") {
 			a.start();
 			b.start();
 			c.start();
 			this.innerHTML = "Stop";
-			//$(this).toggleClass('pressed'); // = "Stop";
+			$(this).toggleClass('start'); // = "Stop";
+			$(this).toggleClass('stop'); // = "Stop";
 			
 			disableControl(); //disable control until the slots reach max speed
 			
@@ -303,7 +317,12 @@ $(document).ready(function() {
 			b.stop();
 			c.stop();
 		//	$(this).toggleClass('pressed'); // = "Stop";
-			this.innerHTML = "Reset";
+			a.reset();
+			b.reset();
+			c.reset();
+			this.innerHTML = "Start";
+			$(this).toggleClass('start'); // = "Stop";
+			$(this).toggleClass('stop'); // = "Stop";
 
 			disableControl(); //disable control until the slots stop
             
@@ -324,6 +343,8 @@ $(document).ready(function() {
 			b.reset();
 			c.reset();
 			this.innerHTML = "Start";
+			$(this).toggleClass('start'); // = "Stop";
+			$(this).toggleClass('stop'); // = "Stop";
 		}
 	});
 });
