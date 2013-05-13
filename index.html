@@ -25,7 +25,7 @@
 		 #wheels {
 			 position:absolute;
 			 margin:auto;
-			 top:30%;
+			 top:25%;
 			 height:100%;
 			 width:100%;
 			 
@@ -291,11 +291,11 @@ $(document).ready(function() {
 			
 			disableControl(); //disable control until the slots reach max speed
 			
-			//winnerData = $.getJSON('app/game/', function(data) {
-			//	winner = data.winner; 
-			//	console.log('winner: ' + data.winner);
-			//});
-			winner=1;
+			winnerData = $.getJSON('app/game/', function(data) {
+				winner = data.winner; 
+				console.log('winner: ' + data.winner);
+			});
+			//winner=1;
 			
 			x = window.setInterval(function() {
 				if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
