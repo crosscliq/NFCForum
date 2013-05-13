@@ -4,7 +4,7 @@ $f3=require('lib/base.php');
 
 $f3->config('config.ini');
 
-$f3->route('GET|POST /',
+$f3->route('GET|POST /nfcforum/app/game',
 	function($f3) {
 
 	$maxplaysbeforewin = 200;	
@@ -38,7 +38,7 @@ $f3->route('GET|POST /',
 	}
 );
 
-$f3->route('GET /launch/@key',
+$f3->route('GET /nfcforum/app/launch/@key',
 	function($f3) {
 		$key = $f3->get('PARAMS.key');
 		if($key ==  'A3FS7J') {
@@ -64,7 +64,7 @@ $f3->route('GET /launch/@key',
 
 	}
 );
-$f3->route('GET /gameoff/@key',
+$f3->route('GET /nfcforum/app/gameoff/@key',
 	function($f3) {
 		$key = $f3->get('PARAMS.key');
 		if($key ==  'A3FS7J') {
