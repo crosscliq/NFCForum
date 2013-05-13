@@ -26,7 +26,7 @@ $f3->route('GET|POST /',
 			}
 		} 
 	} else {
-		$game->winner = 0;
+		$game->winner = 1;
 	}
 	
 	$game->save();
