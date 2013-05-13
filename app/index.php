@@ -19,9 +19,6 @@ $f3->route('GET|POST /',
 			$chance = rand($game->plays, $maxplaysbeforewin); 
 			$win = rand($game->plays, $maxplaysbeforewin); 
 
-			echo 'chance:' . $chance;
-			echo 'win:' . $win;	
-
 			if($chance === $win) {
 
 				$game->winner = 1;
