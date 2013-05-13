@@ -8,7 +8,7 @@
 		<title>Slot Machine</title>
 		<style type="text/css">
 		
-		 body,html { height:100%; margin:0px; width:400px; }
+		 body,html { height:100%; margin:0px; }
 		 #spin-btn { width:100%; position:absolute; bottom:10%;left:0%;text-align:center; z-index:999; }
 		 #frame {
 			 margin:0px;
@@ -23,14 +23,14 @@
 			 z-index:800;
 		 }
 		 #wheels {
-			 margin:4%;
 			 position:absolute;
-			 top:28%;
-			 height:200px;
-			 width:92%;
+			 margin:auto;
+			 top:30%;
+			 height:100%;
+			 width:100%;
 			 
 		 }
-		 #wheels ul { list-style:none; margin:0px; padding:0px;}
+		 #wheels ul { list-style:none; margin:auto; padding:0px;}
 		 #wheels li {
 			-webkit-transition: -webkit-transform .8s ease-in-out; 
 			margin:auto;
@@ -133,12 +133,7 @@ $(document).ready(function() {
 	*/
 	Slot.prototype.start = function() {
 		var _this = this;
-		//winner =1;
-		winnerData = $.getJSON('app/game/', function(data) {
-		winner = data.winner; 
-		console.log('winner: ' + data.winner);
-		 
-		//});
+
 		
 		
 		$(_this.el).addClass('motion');
@@ -295,6 +290,12 @@ $(document).ready(function() {
 			$(this).toggleClass('stop'); // = "Stop";
 			
 			disableControl(); //disable control until the slots reach max speed
+			
+			//winnerData = $.getJSON('app/game/', function(data) {
+			//	winner = data.winner; 
+			//	console.log('winner: ' + data.winner);
+			//});
+			winner=1;
 			
 			x = window.setInterval(function() {
 				if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
