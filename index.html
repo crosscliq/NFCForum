@@ -8,7 +8,7 @@
 		<title>Slot Machine</title>
 		<style type="text/css">
 		
-		 body,html { height:100%; margin:0px; }
+		 body,html { height:100%; margin:0px; width:400px; }
 		 #spin-btn { width:100%; position:absolute; bottom:10%;left:0%;text-align:center; z-index:999; }
 		 #frame {
 			 margin:0px;
@@ -25,7 +25,7 @@
 		 #wheels {
 			 margin:4%;
 			 position:absolute;
-			 top:190px;
+			 top:28%;
 			 height:200px;
 			 width:92%;
 			 
@@ -83,17 +83,6 @@
 
 $(document).ready(function() {
 
-	$('#control').mousedown( function() { 
-
-	$('#control').addClass='pressed';
-	
-	});
-	
-	$('#control').mouseup( function() { 
-
-	$('#control').removeClass='pressed';
-	
-	});
 
 	var winner    = 0,
 	    completed = 0,
@@ -102,10 +91,11 @@ $(document).ready(function() {
 			0, //cc
 			150, //nfc
 			300, //isis
-			450, //cc
+			450, //phone
 			600, //nfc
 			750, // isis
 			900, // phone
+			1050 // phone
 		];
 	
 	var win = [];
@@ -116,19 +106,19 @@ $(document).ready(function() {
 	win[600] = win[600] = win[600] = 5;
 	win[750] = win[750] = win[750] = 6;
 	win[900] = win[900] = win[900] = 7;
-
+	win[1050] = win[1050] = win[1050] = 7;
 	/**
 	* @class Slot
 	* @constructor
 	*/
-	function Slot(el, max, step,win) {
+	function Slot(el, max, step) {
 	
 		this.speed = 0; //speed of the slot at any point of time
 		this.step = step; //speed will increase at this rate
 		this.si = null; //holds setInterval object for the given slot
 		this.el = el; //dom element of the slot
 		this.maxSpeed = max; //max speed this slot can have
-		this.pos = win; //final position of the slot	
+		this.pos = null; //final position of the slot	
 
 		$(el).pan({
             fps:30,
@@ -144,11 +134,11 @@ $(document).ready(function() {
 	Slot.prototype.start = function() {
 		var _this = this;
 		//winner =1;
-		winnerData = $.getJSON('app/game', function(data) {
-		winner = data.winner; 
-		console.log('winner: ' + data.winner);
+		//winnerData = $.getJSON('app/game', function(data) {
+		//winner = data.winner; 
+		//console.log('winner: ' + data.winner);
 		 
-		});
+		//});
 		
 		
 		$(_this.el).addClass('motion');
@@ -185,7 +175,7 @@ $(document).ready(function() {
 			
 
 			
-				     _this.finalPos(_this.el);
+				_this.finalPos(_this.el);
 				
 				$(_this.el).spSpeed(0);
 				$(_this.el).spStop();
@@ -238,7 +228,8 @@ $(document).ready(function() {
 		best += imgHeight + 4;
 		
 		if (winner ==1) { 
-		  bgPos = "0 " + 700 + "px";
+		console.log('winner');
+		  bgPos = "0 " + 600 + "px";
 		} else {
 		  bgPos = "0 " + best + "px";
 		}
