@@ -133,8 +133,8 @@ $(document).ready(function() {
 	*/
 	Slot.prototype.start = function() {
 		var _this = this;
-		winner = $.getJSON('app/', function(data) {
-		
+		winnerData = $.getJSON('app/', function(data) {
+		winner = data.winnner; 
 		console.log('winner: ' + data.winner);
 		
 		});
