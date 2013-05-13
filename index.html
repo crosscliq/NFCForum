@@ -85,7 +85,7 @@
 			<script>
 
 $(document).ready(function() {
-	var winner = 1,
+	var winner    = 0,
 	    completed = 0,
 		imgHeight = 1200,
 		posArr = [
@@ -133,6 +133,12 @@ $(document).ready(function() {
 	*/
 	Slot.prototype.start = function() {
 		var _this = this;
+		winner = $.getJSON('app/', function(data) {
+		
+		console.log('winner: ' + data.winner);
+		
+		});
+		
 		
 		$(_this.el).addClass('motion');
         $(_this.el).spStart();
