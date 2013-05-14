@@ -100,10 +100,14 @@ $(document).ready(function() {
 	}
 
 	$('#control').bind('touchstart',function() {
-		$(this).addClass('pressed'); 
+		if ( winner == 0 ) {
+		 $(this).addClass('pressed'); 
+		}
 	});
 	$('#control').bind('touchend',function() {
-		$(this).removeClass('pressed');
+		if ( winner == 0 ) {
+		 $(this).removeClass('pressed');
+		}
 	});
 
 
@@ -317,35 +321,36 @@ $(document).ready(function() {
 	*/
 	$('#control').click(function() {
 		var x;
-		if (winner ==1 ) { // do nothing 
-		} else {
+
 		 if(this.innerHTML == "Start") {
-			a.start();
-			b.start();
-			c.start();
-			credits=credits-bet;
-			$("#credits").html(credits);
-			this.innerHTML = "Stop";
-			$(this).toggleClass('start'); // = "Stop";
-			$(this).toggleClass('stop'); // = "Stop";
-			
-			disableControl(); //disable control until the slots reach max speed
-			spinSnd.play();
-			winnerData = $.getJSON('app/game/', function(data) {
-				winner = data.winner; 
-				console.log('winner: ' + data.winner);
-				//$("#score").html(data.winner);
-			
-			});
-			//winner=1;
-			
-			x = window.setInterval(function() {
-				if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
-					enableControl();
-					window.clearInterval(x);
-				}
-			}, 100);
-		}
+		 	if (winner ==1 ) { // do nothing 
+			} else {
+				a.start();
+				b.start();
+				c.start();
+				credits=credits-bet;
+				$("#credits").html(credits);
+				this.innerHTML = "Stop";
+				$(this).toggleClass('start'); // = "Stop";
+				$(this).toggleClass('stop'); // = "Stop";
+				
+				disableControl(); //disable control until the slots reach max speed
+				spinSnd.play();
+				winnerData = $.getJSON('app/game/', function(data) {
+					winner = data.winner; 
+					console.log('winner: ' + data.winner);
+					//$("#score").html(data.winner);
+				
+				});
+				//winner=1;
+				
+				x = window.setInterval(function() {
+					if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
+						enableControl();
+						window.clearInterval(x);
+					}
+				}, 100);
+			}
 		 } else if(this.innerHTML == "Stop") {
 			a.stop();
 			b.stop();
@@ -376,6 +381,10 @@ $(document).ready(function() {
                 }
             }, 100);
 		} else { //reset
+				credits=credits+score;
+				score=0;
+				$("#credits").html(credits);
+				$("#score").html(score);
 			a.reset();
 			b.reset();
 			c.reset();
