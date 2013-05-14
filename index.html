@@ -88,7 +88,6 @@ $(document).ready(function() {
 	 stopSnd[1] = new Audio("stop.mp3"); // buffers automatically when created
 	 stopSnd[2] = new Audio("stop.mp3"); // buffers automatically when created
 	 	 
-	 var loseSnd = new Audio("lose.mp3"); // buffers automatically when created
 	 var winSnd = new Audio("win.mp3"); // buffers automatically when created
 	}
 
@@ -314,11 +313,11 @@ $(document).ready(function() {
 			
 			disableControl(); //disable control until the slots reach max speed
 			spinSnd.play();
-			winnerData = $.getJSON('app/game/', function(data) {
-				winner = data.winner; 
-				console.log('winner: ' + data.winner);
-			});
-			
+			//winnerData = $.getJSON('app/game/', function(data) {
+			//	winner = data.winner; 
+			//	console.log('winner: ' + data.winner);
+			//});
+			winner=1;
 			
 			x = window.setInterval(function() {
 				if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
@@ -342,6 +341,7 @@ $(document).ready(function() {
                     window.clearInterval(x);
 					if(winner==1){
 					 a.pos=900;b.pos=900;c.pos=900;
+					 winSnd.play();
 					}
 					printResult();
 					
