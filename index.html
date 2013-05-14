@@ -88,9 +88,7 @@ $(document).ready(function() {
 	}, false);
 
 	 var stopSnd=[];
-	 stopSnd[0] = new Audio("stop.mp3"); // buffers automatically when created
-	 stopSnd[1] = new Audio("stop.mp3"); // buffers automatically when created
-	 stopSnd[2] = new Audio("stop.mp3"); // buffers automatically when created
+	 stopSnd = new Audio("stop.mp3"); // buffers automatically when created
 	 	 
 	 var winSnd = new Audio("win.mp3"); // buffers automatically when created
 	}
@@ -249,7 +247,7 @@ $(document).ready(function() {
 		  bgPos = "0 " + best + "px";	  
 		}
 		  console.log(bgPos);
-		stopSnd[0].currentTime=0;
+		stopSnd.currentTime=0;
 		$(el).animate({
 			backgroundPosition:"(" + bgPos + ")"
 		}, {
@@ -258,7 +256,7 @@ $(document).ready(function() {
 			console.log(bgPos);	   
 				completed ++;
 				console.log(completed);
-				stopSnd[0].play();	
+				stopSnd.play();	
             }
 		});
 	};
