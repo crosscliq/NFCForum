@@ -78,6 +78,20 @@
 
 $(document).ready(function() {
 
+	var debug='';
+	if (!debug) {
+	 var spinSnd = new Audio("spin.mp3"); // buffers automatically when created
+	 spinSnd.loop=true;
+	 var stopSnd=[];
+	 stopSnd[0] = new Audio("stop.mp3"); // buffers automatically when created
+	 stopSnd[1] = new Audio("stop.mp3"); // buffers automatically when created
+	 stopSnd[2] = new Audio("stop.mp3"); // buffers automatically when created
+	 	 
+	 var loseSnd = new Audio("lose.mp3"); // buffers automatically when created
+	 var winSnd = new Audio("win.mp3"); // buffers automatically when created
+	}
+
+
 
 	var winner    = 0,
 		credits   =100,
@@ -155,7 +169,6 @@ $(document).ready(function() {
 		//var winner=1;
 		
 
-		
 		var _this = this,
 			limit = 30;
 		clearInterval(_this.si);
@@ -223,13 +236,16 @@ $(document).ready(function() {
 
 		  bgPos = "0 " + best + "px";
 		  console.log(bgPos);
+		
 		$(el).animate({
 			backgroundPosition:"(" + bgPos + ")"
 		}, {
 			duration: 200,
 			complete: function() {
-			console.log(bgPos);
+			console.log(bgPos);	   
 				completed ++;
+				console.log(completed);
+				stopSnd[completed].play();	
             }
 		});
 	};
@@ -296,7 +312,7 @@ $(document).ready(function() {
 			$(this).toggleClass('stop'); // = "Stop";
 			
 			disableControl(); //disable control until the slots reach max speed
-			
+			spinSnd.play();
 			winnerData = $.getJSON('app/game/', function(data) {
 				winner = data.winner; 
 				console.log('winner: ' + data.winner);
@@ -314,7 +330,7 @@ $(document).ready(function() {
 			b.stop();
 			c.stop();
 		//	$(this).toggleClass('pressed'); // = "Stop";
-
+			spinSnd.pause();
 			disableControl(); //disable control until the slots stop
             this.innerHTML="reset";
             //check every 100ms if slots have stopped
