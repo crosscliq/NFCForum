@@ -53,7 +53,7 @@
 		 }
 		 #spin-btn { margin:auto; text-align:center; }
 		 #score-board { z-index:998;position:relative;width:80%; background:black; border-radius:10px; padding:10px;margin:0px auto;color:#fff;}
-		 #score-board div { display:inline-block; width:20%; padding-top:10px;}
+		 #score-board div { display:inline-block; width:33%; padding-top:10px;text-align:center;}
 		 #control {
 			margin:auto;
 			width:274px;
@@ -260,7 +260,7 @@ $(document).ready(function() {
 		$(this.el).css('background-position', '0px 4px');
 		this.speed = 0;
 		completed = 0;
-		$('#result').html('');
+		//$('#result').html('');
 	};
 
 	function enableControl() {
@@ -287,7 +287,7 @@ $(document).ready(function() {
 		}
 		console.log(score);
 		console.log(a.pos + ' ' + b.pos + ' ' + c.pos );
-		$('#result').html(res);
+		//$('#result').html(res);
 	}
 
 
