@@ -17,7 +17,7 @@
 		  }
 		 body,html { height:100%; margin:0px; overflow:hidden; }
 		 body { margin:0px; overflow:hidden; }
-		 #spin-btn { width:100%; position:absolute; bottom:10;left:0%;text-align:center; z-index:999; }
+		 #spin-btn { width:100%; position:absolute; bottom:25;left:0%;text-align:center; z-index:999; }
 		 #frame {
 			 margin:0px;
 			 background:url(frame.png) no-repeat; 
@@ -32,12 +32,13 @@
 		 #wheels {
 			 position:absolute;
 			 margin:auto;
-			 top:28%;
-			 height:181px;
+			 top:27%;
+			 height:140px;
 			 width:100%;
 			 
 		 }
-		 #wheels ul { list-style:none; margin:auto; padding:0px;}
+		 #result { position:absolute; top:0; width:100%; text-align:center; font-size:1.2em; }
+		 #wheels ul { list-style:none; margin:0px auto 0px auto; padding:0px;}
 		 #wheels li {
 			-webkit-transition: -webkit-transform .8s ease-in-out; 
 			margin:auto;
@@ -51,6 +52,8 @@
 
 		 }
 		 #spin-btn { margin:auto; text-align:center; }
+		 #score-board { z-index:998;position:relative;width:80%; background:black; border-radius:10px; padding:10px;margin:0px auto;color:#fff;}
+		 #score-board div { display:inline-block; width:20%; padding-top:10px;}
 		 #control {
 			margin:auto;
 			width:274px;
@@ -71,27 +74,15 @@
 
 		 
 		</style>
-	</head>
-	<body>
-	<div id="spin-btn">
-	<div id="result"></div>
-	<a href="#" id="control" class="start">Start</a>
-	</div>
-	<div id="frame">
-	</div>
-	<div id="wheels">
-		<ul>
-			<li id="slot1" class="slot"></li>
-			<li id="slot2" class="slot"></li>
-			<li id="slot3" class="slot"></li>
-		</ul>
-	</div>
-<script>
+		<script>
 
 $(document).ready(function() {
 
 
 	var winner    = 0,
+		credits   =100,
+		score     =0,
+		bet       =1,
 	    completed = 0,
 		imgHeight = 1200,
 		posArr = [
@@ -109,7 +100,7 @@ $(document).ready(function() {
 	win[0]   = win[0]   = win[0]   = 1;
 	win[150] = win[150] = win[150] = 2;
 	win[300] = win[300] = win[300] = 3;
-	win[450] = win[300] = win[450] = 4;
+	win[450] = win[450] = win[450] = 4;
 	win[600] = win[600] = win[600] = 5;
 	win[750] = win[750] = win[750] = 6;
 	win[900] = win[900] = win[900] = 7;
@@ -231,12 +222,13 @@ $(document).ready(function() {
 		
 
 		  bgPos = "0 " + best + "px";
-		
+		  console.log(bgPos);
 		$(el).animate({
 			backgroundPosition:"(" + bgPos + ")"
 		}, {
 			duration: 200,
 			complete: function() {
+			console.log(bgPos);
 				completed ++;
             }
 		});
@@ -265,11 +257,19 @@ $(document).ready(function() {
 
 	function printResult() {
 		var res;
+		
+
 		if(win[a.pos] === win[b.pos] && win[a.pos] === win[c.pos]) {
 			res = "You Win!";
+		console.log("old score: " + score);
+			score=(score+bet*win[a.pos]);//*win;
+			console.log("new score: " + score);
+			$("#score").html(score);
 		} else {
 			res = "You Lose";
+	
 		}
+		console.log(score);
 		console.log(a.pos + ' ' + b.pos + ' ' + c.pos );
 		$('#result').html(res);
 	}
@@ -289,6 +289,8 @@ $(document).ready(function() {
 			a.start();
 			b.start();
 			c.start();
+			credits=credits-bet;
+			$("#credits").html(credits);
 			this.innerHTML = "Stop";
 			$(this).toggleClass('start'); // = "Stop";
 			$(this).toggleClass('stop'); // = "Stop";
@@ -299,7 +301,7 @@ $(document).ready(function() {
 				winner = data.winner; 
 				console.log('winner: ' + data.winner);
 			});
-			//winner=1;
+			
 			
 			x = window.setInterval(function() {
 				if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
@@ -312,15 +314,9 @@ $(document).ready(function() {
 			b.stop();
 			c.stop();
 		//	$(this).toggleClass('pressed'); // = "Stop";
-			a.reset();
-			b.reset();
-			c.reset();
-			this.innerHTML = "Start";
-			$(this).toggleClass('start'); // = "Stop";
-			$(this).toggleClass('stop'); // = "Stop";
 
 			disableControl(); //disable control until the slots stop
-            
+            this.innerHTML="reset";
             //check every 100ms if slots have stopped
             //if so, enable the control
             x = window.setInterval(function() {
@@ -331,6 +327,8 @@ $(document).ready(function() {
 					 a.pos=900;b.pos=900;c.pos=900;
 					}
 					printResult();
+					
+					
                 }
             }, 100);
 		} else { //reset
@@ -344,5 +342,28 @@ $(document).ready(function() {
 	});
 });
 		</script>
+	</head>
+	<body>
+	
+	<div id="spin-btn">
+	<a href="#" id="control" class="start">Start</a>
+	</div>
+
+
+	<div id="frame">
+	</div>
+	<div id="wheels">
+
+		<ul>
+			<li id="slot1" class="slot"></li>
+			<li id="slot2" class="slot"></li>
+			<li id="slot3" class="slot"></li>
+		</ul>
+			<div id="score-board">
+	  <div id="result"></div>
+	  <div id="credits">100</div><div id="score">0</div><div id="bet">1</div>
+	</div>
+	</div>
+	
 	</body>
 </html>
