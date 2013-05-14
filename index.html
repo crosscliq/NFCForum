@@ -334,7 +334,7 @@ $(document).ready(function() {
 				winner = data.winner; 
 				console.log('winner: ' + data.winner);
 				//$("#score").html(data.winner);
-				$("#control").hide();
+			
 			});
 			//winner=1;
 			
@@ -348,7 +348,10 @@ $(document).ready(function() {
 			a.stop();
 			b.stop();
 			c.stop();
-		//	$(this).toggleClass('pressed'); // = "Stop";
+			if (winner ==1 ) {
+			 $("#control").hide();
+			}
+			//	$(this).toggleClass('pressed'); // = "Stop";
 			$(this).toggleClass('reset'); // = "Stop";
 			spinSnd.currentTime=0;
 			spinSnd.pause();
