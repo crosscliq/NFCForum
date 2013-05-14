@@ -233,8 +233,11 @@ $(document).ready(function() {
 
 		best += imgHeight + 4;
 		
-
-		  bgPos = "0 " + best + "px";
+		if (winner==1){ 
+		  bgPos = "0 " + 640 + "px";
+		} else {
+		  bgPos = "0 " + best + "px";	  
+		}
 		  console.log(bgPos);
 		
 		$(el).animate({
@@ -313,11 +316,11 @@ $(document).ready(function() {
 			
 			disableControl(); //disable control until the slots reach max speed
 			spinSnd.play();
-			//winnerData = $.getJSON('app/game/', function(data) {
-			//	winner = data.winner; 
-			//	console.log('winner: ' + data.winner);
-			//});
-			winner=1;
+			winnerData = $.getJSON('app/game/', function(data) {
+				winner = data.winner; 
+				console.log('winner: ' + data.winner);
+			});
+			//winner=1;
 			
 			x = window.setInterval(function() {
 				if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
