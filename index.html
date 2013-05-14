@@ -113,7 +113,7 @@ $(document).ready(function() {
 	win[600] = win[600] = win[600] = 5;
 	win[750] = win[750] = win[750] = 6;
 	win[900] = win[900] = win[900] = 7;
-	win[1050] = win[1050] = win[1050] = 7;
+	win[1050] = win[1050] = win[1050] = 8;
 	/**
 	* @class Slot
 	* @constructor
@@ -229,12 +229,9 @@ $(document).ready(function() {
 
 		best += imgHeight + 4;
 		
-		if (winner ==1) { 
-		console.log('winner');
-		  bgPos = "0 " + 600 + "px";
-		} else {
+
 		  bgPos = "0 " + best + "px";
-		}
+		
 		$(el).animate({
 			backgroundPosition:"(" + bgPos + ")"
 		}, {
@@ -298,10 +295,10 @@ $(document).ready(function() {
 			
 			disableControl(); //disable control until the slots reach max speed
 			
-		//	winnerData = $.getJSON('app/game/', function(data) {
-			//	winner = data.winner; 
-		//		console.log('winner: ' + data.winner);
-			//});
+			winnerData = $.getJSON('app/game/', function(data) {
+				winner = data.winner; 
+				console.log('winner: ' + data.winner);
+			});
 			//winner=1;
 			
 			x = window.setInterval(function() {
