@@ -13,9 +13,7 @@
 			-webkit-touch-callout:none;
 			-webkit-user-drag:none;
 			}
-		  :focus {
-			outline: 0;
-		  }
+
 		 body,html { height:100%; margin:0px; overflow:hidden; font-weight:normal; font-family:iceland,verdana;}
 		 body { margin:0px; overflow:hidden; }
 		 #spin-btn { width:100%; position:absolute; bottom:15;left:0%;text-align:center; z-index:999; }
@@ -50,7 +48,6 @@
 			height:150px;
 			color:pink;
 			text-align:center;
-
 		 }
 		 #leds { -webkit-transition: -webkit-transform .2s ease-in-out;  background:url(leds.png) no-repeat; height:28px; position:absolute; z-index:9999; bottom:-19px; width:100%; background-position:center -28px; margin:0 auto;} 
 		 #leds.on { background-position:center 0px; }
@@ -72,7 +69,6 @@
 		 .reset {  			background:url(btn.png) no-repeat; background-position:center -400px; }		 
 		 .reset.pressed {  	background:url(btn.png) no-repeat; background-position:center -500px; }
 
-		 
 		 .slot { background:#fff  url(bars.png); background-position:0 4px;background-size:100%; }
 		 .motion {
 		    background:#fff url(bars-blur.png);
@@ -84,7 +80,7 @@
 		<script>
 
 $(document).ready(function() {
-
+	window.scroll(0,1);
 	var debug='';
 	if (!debug) {
 	 var spinSnd = new Audio("spin.mp3"); // buffers automatically when created
@@ -93,9 +89,7 @@ $(document).ready(function() {
       this.play();
 	}, false);
 
-	 var stopSnd=[];
-	 stopSnd = new Audio("stop.mp3"); // buffers automatically when created
-	 	 
+	 var stopSnd = new Audio("stop.mp3"); // buffers automatically when created
 	 var winSnd = new Audio("win.mp3"); // buffers automatically when created
 	}
 
@@ -164,8 +158,6 @@ $(document).ready(function() {
 	Slot.prototype.start = function() {
 		var _this = this;
 
-		
-		
 		$(_this.el).addClass('motion');
         $(_this.el).spStart();
 		_this.si = window.setInterval(function() {
@@ -174,9 +166,6 @@ $(document).ready(function() {
 				$(_this.el).spSpeed(_this.speed);
 			}
 		}, 100);
-		
-
-		
 	};
 
 	/**
@@ -184,8 +173,6 @@ $(document).ready(function() {
 	* Stops a slot
 	*/
 	Slot.prototype.stop = function() {
-		//var winner=1;
-		
 
 		var _this = this,
 			limit = 30;
@@ -196,11 +183,9 @@ $(document).ready(function() {
 				$(_this.el).spSpeed(_this.speed);
 			}
 			if(_this.speed <= limit) {
-			
-
-			
+	
 				_this.finalPos(_this.el);
-				
+			
 				$(_this.el).spSpeed(0);
 				$(_this.el).spStop();
 				clearInterval(_this.si);
@@ -239,10 +224,7 @@ $(document).ready(function() {
 					if((k - pos) < posMin) {
 						posMin = k - pos;
 						best = k;
-		
-						  this.pos = posArr[i]; //update the final position of the slot
-
-						
+						this.pos = posArr[i]; 
 					}
 					break;
 				}
@@ -281,36 +263,18 @@ $(document).ready(function() {
 		$(this.el).css('background-position', '0px 4px');
 		this.speed = 0;
 		completed = 0;
-		//$('#result').html('');
+
 	};
 
-	function enableControl() {
-	//	$('#control').css("opacity", '1');
-	}
-
-	function disableControl() {
-		//$('#control').css("opacity", '0.5');
-	}
-
 	function printResult() {
-		var res;
-		
 
 		if(win[a.pos] === win[b.pos] && win[a.pos] === win[c.pos]) {
-			res = "You Win!";
-		console.log("old score: " + score);
-			score=(score+bet*win[a.pos]);//*win;
-			console.log("new score: " + score);
-			$("#score").html(score);
-		} else {
-			res = "You Lose";
-	
-		}
-		console.log(score);
-		console.log(a.pos + ' ' + b.pos + ' ' + c.pos );
-		//$('#result').html(res);
-	}
 
+			score=(score+bet*win[a.pos]);//*win;
+			$("#score").html(score);
+		
+		}
+	}
 
 	var a = new Slot('#slot1', 30, 1),
 		b = new Slot('#slot2', 45, 2),
@@ -331,22 +295,19 @@ $(document).ready(function() {
 				credits=credits-bet;
 				$("#credits").html(credits);
 				this.innerHTML = "Stop";
-				$(this).toggleClass('start'); // = "Stop";
-				$(this).toggleClass('stop'); // = "Stop";
+				$(this).toggleClass('start'); 
+				$(this).toggleClass('stop'); 
 				
-				disableControl(); //disable control until the slots reach max speed
 				spinSnd.play();
+				
 				winnerData = $.getJSON('app/game/', function(data) {
 					winner = data.winner; 
-					console.log('winner: ' + data.winner);
-					//$("#score").html(data.winner);
-				
+
 				});
-				//winner=1;
+
 				
 				x = window.setInterval(function() {
 					if(a.speed >= a.maxSpeed && b.speed >= b.maxSpeed && c.speed >= c.maxSpeed) {
-						enableControl();
 						window.clearInterval(x);
 					}
 				}, 100);
@@ -356,24 +317,18 @@ $(document).ready(function() {
 			b.stop();
 			c.stop();
 
-			//	$(this).toggleClass('pressed'); // = "Stop";
-			$(this).toggleClass('reset'); // = "Stop";
+
+			$(this).toggleClass('reset');
 			spinSnd.currentTime=0;
 			spinSnd.pause();
-			disableControl(); //disable control until the slots stop
             this.innerHTML="reset";
-            //check every 100ms if slots have stopped
-            //if so, enable the control
+
             x = window.setInterval(function() {
                 if(a.speed === 0 && b.speed === 0 && c.speed === 0 && completed === 3) {
-                    enableControl();
                     window.clearInterval(x);
 					if(winner==1){
 					 winSnd.play();
-					 
 					 $("#leds").fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).toggleClass('on');
-					 
-					 
 					}
 					printResult();
 					
@@ -385,13 +340,13 @@ $(document).ready(function() {
 				score=0;
 				$("#credits").html(credits);
 				$("#score").html(score);
-			a.reset();
-			b.reset();
-			c.reset();
-			this.innerHTML = "Start";
-			$(this).toggleClass('start'); // = "Stop";
-			$(this).toggleClass('stop'); // = "Stop";
-			$(this).toggleClass('reset'); // = "Stop";
+				a.reset();
+				b.reset();
+				c.reset();
+				this.innerHTML = "Start";
+				$(this).toggleClass('start');
+				$(this).toggleClass('stop'); 
+				$(this).toggleClass('reset'); 
 		}
 	});
 });
@@ -400,24 +355,23 @@ $(document).ready(function() {
 	<body>
 	
 	<div id="spin-btn">
-	<a href="#" id="control" class="start">Start</a>
+		<a href="#" id="control" class="start">Start</a>
 	</div>
 
-
-	<div id="frame">
-	</div>
-	<div id="wheels">
-		<div id="leds"></div>
-		<ul>
-			<li id="slot1" class="slot"></li>
-			<li id="slot2" class="slot"></li>
-			<li id="slot3" class="slot"></li>
-		</ul>
+	<div id="frame"></div>
+		<div id="wheels">
+			<div id="leds"></div>
+			<ul>
+				<li id="slot1" class="slot"></li>
+				<li id="slot2" class="slot"></li>
+				<li id="slot3" class="slot"></li>
+			</ul>
+		
+		<div id="score-board">
+		  <div id="result"></div>
+		  <div id="credits">100</div><div id="score">0</div><div id="bet">1</div>
+		</div>
 	
-			<div id="score-board">
-	  <div id="result"></div>
-	  <div id="credits">100</div><div id="score">0</div><div id="bet">1</div>
-	</div>
 	</div>
 	
 	</body>
