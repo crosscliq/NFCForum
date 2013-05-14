@@ -95,10 +95,10 @@ $(document).ready(function() {
 	 var winSnd = new Audio("win.mp3"); // buffers automatically when created
 	}
 
-	$('#control').mousedown(function() {
-		$(this).addClass('pressed');
+	$('#control')..bind('touchstart',function() {
+		$(this).addClass('pressed'); 
 	});
-	$('#control').mouseup(function() {
+	$('#control').bind('touchend',(function() {
 		$(this).removeClass('pressed');
 	});
 
