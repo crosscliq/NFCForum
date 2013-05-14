@@ -112,9 +112,9 @@ $(document).ready(function() {
 			150, //nfc
 			300, //isis
 			450, //phone
-			600, //nfc
-			750, // isis
-			900, // phone
+			600, //cc
+			750, // nfc
+			900, // isis
 			1050 // phone
 		];
 	
@@ -352,7 +352,7 @@ $(document).ready(function() {
                     enableControl();
                     window.clearInterval(x);
 					if(winner==1){
-					 a.pos=900;b.pos=900;c.pos=900;
+					 a.pos=920;b.pos=920;c.pos=920;
 					 winSnd.play();
 					}
 					printResult();
