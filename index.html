@@ -7,7 +7,10 @@
 
 		<title>Slot Machine</title>
 		<style type="text/css">
-		
+		 * {
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+			}
 		 body,html { height:100%; margin:0px; overflow:hidden; }
 		 body { margin:0px; overflow:hidden; }
 		 #spin-btn { width:100%; position:absolute; bottom:10;left:0%;text-align:center; z-index:999; }
@@ -25,7 +28,7 @@
 		 #wheels {
 			 position:absolute;
 			 margin:auto;
-			 top:160px;
+			 top:28%;
 			 height:181px;
 			 width:100%;
 			 
