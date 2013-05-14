@@ -317,8 +317,9 @@ $(document).ready(function() {
 	*/
 	$('#control').click(function() {
 		var x;
-
-		if(this.innerHTML == "Start") {
+		if (winner ==1 ) { // do nothing 
+		} else {
+		 if(this.innerHTML == "Start") {
 			a.start();
 			b.start();
 			c.start();
@@ -344,13 +345,12 @@ $(document).ready(function() {
 					window.clearInterval(x);
 				}
 			}, 100);
-		} else if(this.innerHTML == "Stop") {
+		}
+		 } else if(this.innerHTML == "Stop") {
 			a.stop();
 			b.stop();
 			c.stop();
-			if (winner ==1 ) {
-			 $("#control").hide();
-			}
+
 			//	$(this).toggleClass('pressed'); // = "Stop";
 			$(this).toggleClass('reset'); // = "Stop";
 			spinSnd.currentTime=0;
