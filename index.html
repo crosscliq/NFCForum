@@ -6,6 +6,7 @@
 	<script src="jquery.backgroundPosition.js"></script>
 
 		<title>Slot Machine</title>
+		<link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
 		<style type="text/css">
 		 * {
 			-webkit-user-select:none;
@@ -15,7 +16,7 @@
 		  :focus {
 			outline: 0;
 		  }
-		 body,html { height:100%; margin:0px; overflow:hidden; }
+		 body,html { height:100%; margin:0px; overflow:hidden; font-weight:normal; font-family:iceland,verdana;}
 		 body { margin:0px; overflow:hidden; }
 		 #spin-btn { width:100%; position:absolute; bottom:25;left:0%;text-align:center; z-index:999; }
 		 #frame {
@@ -51,8 +52,10 @@
 			text-align:center;
 
 		 }
+		 #leds { -webkit-transition: -webkit-transform .2s ease-in-out;  background:url(leds.png) no-repeat; height:28px; position:absolute; z-index:9999; bottom:-19px; width:100%; background-position:center -28px; margin:0 auto;} 
+		 #leds.on { background-position:center 0px; }
 		 #spin-btn { margin:auto; text-align:center; }
-		 #score-board { z-index:998;position:relative;width:80%; background:black; border-radius:10px; padding:10px;margin:0px auto;color:#fff;}
+		 #score-board { z-index:998;position:relative;width:92%; padding:20px 10px 10px 10px;margin:0px auto;font-size:2em;color:#fd15ea;}
 		 #score-board div { display:inline-block; width:33%; padding-top:10px;text-align:center;}
 		 #control {
 		    -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -353,7 +356,10 @@ $(document).ready(function() {
                     window.clearInterval(x);
 					if(winner==1){
 					 winSnd.play();
-					 navigator.vibrate(3000);
+					 
+					 $("#leds")..fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } )fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).fadeOut(200, function(){ $("#leds").toggleClass('on'); } ).fadeIn(200, function(){ $("#leds").toggleClass('on'); } ).toggleClass('on');
+					 
+					 
 					}
 					printResult();
 					
@@ -382,12 +388,13 @@ $(document).ready(function() {
 	<div id="frame">
 	</div>
 	<div id="wheels">
-
+		<div id="leds"></div>
 		<ul>
 			<li id="slot1" class="slot"></li>
 			<li id="slot2" class="slot"></li>
 			<li id="slot3" class="slot"></li>
 		</ul>
+	
 			<div id="score-board">
 	  <div id="result"></div>
 	  <div id="credits">100</div><div id="score">0</div><div id="bet">1</div>
