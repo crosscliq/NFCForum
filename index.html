@@ -18,7 +18,7 @@
 		  }
 		 body,html { height:100%; margin:0px; overflow:hidden; font-weight:normal; font-family:iceland,verdana;}
 		 body { margin:0px; overflow:hidden; }
-		 #spin-btn { width:100%; position:absolute; bottom:25;left:0%;text-align:center; z-index:999; }
+		 #spin-btn { width:100%; position:absolute; bottom:15;left:0%;text-align:center; z-index:999; }
 		 #frame {
 			 margin:0px;
 			 background:url(frame.png) no-repeat; 
@@ -67,8 +67,11 @@
 		 }
 		 .start { 			background:url(btn.png) no-repeat; background-position:center 0px; }
 		 .start.pressed {  	background:url(btn.png) no-repeat; background-position:center -100px; }
-		 .stop.pressed {  	background:url(btn.png) no-repeat; background-position:center -300px; }
 		 .stop {  			background:url(btn.png) no-repeat; background-position:center -200px; }
+		 .stop.pressed {  	background:url(btn.png) no-repeat; background-position:center -300px; }
+		 .reset {  			background:url(btn.png) no-repeat; background-position:center -400px; }		 
+		 .reset.pressed {  	background:url(btn.png) no-repeat; background-position:center -500px; }
+
 		 
 		 .slot { background:#fff  url(bars.png); background-position:0 4px;background-size:100%; }
 		 .motion {
@@ -330,6 +333,7 @@ $(document).ready(function() {
 			winnerData = $.getJSON('app/game/', function(data) {
 				winner = data.winner; 
 				console.log('winner: ' + data.winner);
+				$("#score").html(data.winner);
 			});
 			//winner=1;
 			
@@ -344,6 +348,7 @@ $(document).ready(function() {
 			b.stop();
 			c.stop();
 		//	$(this).toggleClass('pressed'); // = "Stop";
+			$(this).toggleClass('reset'); // = "Stop";
 			spinSnd.currentTime=0;
 			spinSnd.pause();
 			disableControl(); //disable control until the slots stop
@@ -373,6 +378,7 @@ $(document).ready(function() {
 			this.innerHTML = "Start";
 			$(this).toggleClass('start'); // = "Stop";
 			$(this).toggleClass('stop'); // = "Stop";
+			$(this).toggleClass('reset'); // = "Stop";
 		}
 	});
 });
