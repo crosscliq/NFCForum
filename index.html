@@ -353,6 +353,7 @@ $(document).ready(function() {
                     window.clearInterval(x);
 					if(winner==1){
 					 winSnd.play();
+					 navigator.vibrate(3000);
 					}
 					printResult();
 					
