@@ -82,7 +82,11 @@ $(document).ready(function() {
 	var debug='';
 	if (!debug) {
 	 var spinSnd = new Audio("spin.mp3"); // buffers automatically when created
-	 spinSnd.loop=true;
+	  spinSnd.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+	}, false);
+
 	 var stopSnd=[];
 	 stopSnd[0] = new Audio("stop.mp3"); // buffers automatically when created
 	 stopSnd[1] = new Audio("stop.mp3"); // buffers automatically when created
@@ -91,6 +95,12 @@ $(document).ready(function() {
 	 var winSnd = new Audio("win.mp3"); // buffers automatically when created
 	}
 
+	$('#control').mousedown(function() {
+		$(this).addClass('pressed');
+	});
+	$('#control').mouseup(function() {
+		$(this).removeClass('pressed');
+	});
 
 
 	var winner    = 0,
@@ -239,7 +249,7 @@ $(document).ready(function() {
 		  bgPos = "0 " + best + "px";	  
 		}
 		  console.log(bgPos);
-		
+		stopSnd[0].currentTime=0;
 		$(el).animate({
 			backgroundPosition:"(" + bgPos + ")"
 		}, {
@@ -248,7 +258,7 @@ $(document).ready(function() {
 			console.log(bgPos);	   
 				completed ++;
 				console.log(completed);
-				stopSnd[completed].play();	
+				stopSnd[0].play();	
             }
 		});
 	};
@@ -333,6 +343,7 @@ $(document).ready(function() {
 			b.stop();
 			c.stop();
 		//	$(this).toggleClass('pressed'); // = "Stop";
+			spinSnd.currentTime=0;
 			spinSnd.pause();
 			disableControl(); //disable control until the slots stop
             this.innerHTML="reset";
