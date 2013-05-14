@@ -8,11 +8,11 @@
 		<title>Slot Machine</title>
 		<style type="text/css">
 		
-		 body,html { height:100%; margin:0px; }
+		 body,html { height:100%; margin:0px; overflow:hidden; }
+		 body { margin:0px; overflow:hidden; }
 		 #spin-btn { width:100%; position:absolute; bottom:10%;left:0%;text-align:center; z-index:999; }
 		 #frame {
 			 margin:0px;
-			 overflow:hidden;
 			 background:url(frame.png) no-repeat; 
 			 background-size:100%; 
 			 background-position:center 0;
@@ -25,8 +25,8 @@
 		 #wheels {
 			 position:absolute;
 			 margin:auto;
-			 top:25%;
-			 height:100%;
+			 top:40%;
+			 height:181px;
 			 width:100%;
 			 
 		 }
@@ -291,10 +291,10 @@ $(document).ready(function() {
 			
 			disableControl(); //disable control until the slots reach max speed
 			
-			winnerData = $.getJSON('app/game/', function(data) {
-				winner = data.winner; 
-				console.log('winner: ' + data.winner);
-			});
+		//	winnerData = $.getJSON('app/game/', function(data) {
+			//	winner = data.winner; 
+		//		console.log('winner: ' + data.winner);
+			//});
 			//winner=1;
 			
 			x = window.setInterval(function() {
