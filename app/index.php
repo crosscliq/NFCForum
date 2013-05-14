@@ -26,7 +26,7 @@ $f3->route('GET|POST /nfcforum/app/game',
 			}
 		} 
 	} else {
-		$game->winner = 1;
+		$game->winner = 0;
 	}
 	
 	$game->save();
