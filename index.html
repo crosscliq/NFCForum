@@ -333,7 +333,8 @@ $(document).ready(function() {
 			winnerData = $.getJSON('app/game/', function(data) {
 				winner = data.winner; 
 				console.log('winner: ' + data.winner);
-				$("#score").html(data.winner);
+				//$("#score").html(data.winner);
+				$("#control").hide();
 			});
 			//winner=1;
 			
