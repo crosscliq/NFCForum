@@ -38,6 +38,22 @@ $f3->route('GET|POST /nfcforum/app/game',
 	}
 );
 
+$f3->route('GET|POST /nfcforum/app/results',
+	function($f3) {
+
+	$maxplaysbeforewin = 200;	
+	$db=new DB\Jig('db/data/',DB\Jig::FORMAT_JSON);
+	$game=new DB\Jig\Mapper($db,'game');
+	$game->load(array('@game=?','1'));
+	
+	$response = array('gameon'=>$game->gameon, 'plays'=>$game->plays, 'winner'=> $game->winner, 'won'=> $game->won );
+	
+	echo json_encode($response);
+
+	}
+);
+
+
 $f3->route('GET /nfcforum/app/launch/@key',
 	function($f3) {
 		$key = $f3->get('PARAMS.key');
